@@ -85,10 +85,10 @@ export default function Form({ close }) {
           placeholder="Create a visually appealing homepage design"
           minRows={4}
           mt="md"
-          {...register("description")}
+          {...register("description", { required: true })}
           classNames={{ input: classes.input, label: classes.inputLabel }}
         />
-        {errors.title && (
+        {errors.description && (
           <Text fz="sm" c="red">
             Description field is required
           </Text>
