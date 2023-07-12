@@ -1,6 +1,6 @@
 import React from "react";
 import { Group, Text, ActionIcon, Tooltip } from "@mantine/core";
-import { IconTrash, IconEye } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
 import UpdateTask from "../UpdateTask/UpdateTask";
 import ViewTask from "../../ViewTask/ViewTask";
 
@@ -43,9 +43,8 @@ const Row = ({ task, deleteTask, index }) => {
       </td>
       <td>
         <Group spacing={0} position="right">
-          <ViewTask task={task}/>
-
-          <UpdateTask />
+          <ViewTask task={task} />
+          <UpdateTask task={task}/>
           <ActionIcon color="red" onClick={() => deleteTask(index)}>
             <Tooltip label="Delete">
               <IconTrash size="1rem" stroke={1.5} />
