@@ -1,6 +1,6 @@
 import React from "react";
 import { Group, Text, ActionIcon, Tooltip } from "@mantine/core";
-import { IconPencil, IconTrash, IconEye } from "@tabler/icons-react";
+import { IconTrash, IconEye } from "@tabler/icons-react";
 import UpdateTask from "../UpdateTask/UpdateTask";
 
 const Row = ({ task, deleteTask, index }) => {
@@ -13,7 +13,7 @@ const Row = ({ task, deleteTask, index }) => {
       </td>
       <td>
         <Text fz="sm" c="dimmed">
-          {task.title}
+          {task.title?.substring(0, 30)}...
         </Text>
       </td>
       <td>
