@@ -1,7 +1,8 @@
-import React from "react"; 
+import React from "react";
 import { Box, Container } from "@mantine/core";
 import TaskTable from "./TaskTable/TaskTable";
 import AddTask from "./AddTask/AddTask";
+import UpdateTask from "./UpdateTask/UpdateTask";
 
 const Tasks = () => {
   return (
@@ -14,7 +15,6 @@ const Tasks = () => {
       }}
     >
       <Box>
-        <AddTask />
         <TaskTable />
       </Box>
     </Container>
