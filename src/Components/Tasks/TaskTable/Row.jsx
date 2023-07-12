@@ -2,6 +2,7 @@ import React from "react";
 import { Group, Text, ActionIcon, Tooltip } from "@mantine/core";
 import { IconTrash, IconEye } from "@tabler/icons-react";
 import UpdateTask from "../UpdateTask/UpdateTask";
+import ViewTask from "../../ViewTask/ViewTask";
 
 const Row = ({ task, deleteTask, index }) => {
   return (
@@ -42,11 +43,7 @@ const Row = ({ task, deleteTask, index }) => {
       </td>
       <td>
         <Group spacing={0} position="right">
-          <ActionIcon>
-            <Tooltip label="View">
-              <IconEye size="1rem" stroke={1.5} />
-            </Tooltip>
-          </ActionIcon>
+          <ViewTask task={task}/>
 
           <UpdateTask />
           <ActionIcon color="red" onClick={() => deleteTask(index)}>
