@@ -1,4 +1,4 @@
-const intialData = [
+const tasks = [
   {
     id: 1,
     title: "Design Homepage",
@@ -25,4 +25,4 @@ const intialData = [
   },
 ];
 
-export { intialData };
+export { tasks };

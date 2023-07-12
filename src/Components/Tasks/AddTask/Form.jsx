@@ -1,55 +1,38 @@
 import { useState } from "react";
 import {
-  createStyles,
-  Title,
+  Text,
   TextInput,
   Textarea,
   Button,
   Group,
-  rem,
   Select,
   Box,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import useStyles from "./styles";
 
-const useStyles = createStyles((theme) => ({
-  description: {
-    color: theme.colors[theme.primaryColor][0],
-    maxWidth: rem(300),
+export default function Form({ close }) {
+  const [formData, setFormData] = useState({});
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-    [theme.fn.smallerThan("sm")]: {
-      maxWidth: "100%",
-    },
-  },
-
-  form: {
-    backgroundColor: theme.white,
-    padding: theme.spacing.xl,
-    borderRadius: theme.radius.md,
-  },
-
-  input: {
-    backgroundColor: theme.white,
-    borderColor: theme.colors.gray[4],
-    color: theme.black,
-
-    "&::placeholder": {
-      color: theme.colors.gray[5],
-    },
-  },
-
-  inputLabel: {
-    color: theme.black,
-  },
-
-  control: {
-    backgroundColor: theme.colors[theme.primaryColor][6],
-  },
-}));
-
-export default function Form() {
-  const [value, setValue] = useState(null);
   const { classes } = useStyles();
+
+  const onSubmit = (data) => {
+    dispatch({
+      type: "ADD_TASK",
+      task: { ...data, ...formData },
+    });
+    reset();
+    close();
+  };
 
   return (
     <Box>
@@ -58,8 +41,14 @@ export default function Form() {
           label="Title"
           placeholder="Design Homepage"
           required
+          {...register("title", { required: true })}
           classNames={{ input: classes.input, label: classes.inputLabel }}
         />
+        {errors.title && (
+          <Text fz="sm" c="red">
+            Title is required
+          </Text>
+        )}
 
         <div
           style={{
@@ -68,24 +57,26 @@ export default function Form() {
             marginTop: "20px",
           }}
         >
-          <Select
-            label="Assign To"
-            placeholder="Pick one"
-            data={[
-              { value: "react", label: "React" },
-              { value: "ng", label: "Angular" },
-              { value: "svelte", label: "Svelte" },
-              { value: "vue", label: "Vue" },
-            ]}
-            w={"50%"}
-          />
-          <DateInput
-            value={value}
-            onChange={setValue}
-            label="Due Date"
-            placeholder="July 18, 2023"
-            w={"50%"}
-          />
+          <div style={{ width: "50%" }}>
+            <Select
+              label="Assign To"
+              placeholder="Pick one"
+              data={[
+                { value: "John", label: "John" },
+                { value: "Sarah", label: "Sarah" },
+                { value: "David", label: "David" },
+              ]}
+              onChange={(e) => setFormData({ ...formData, assignedTo: e })}
+            />
+          </div>
+          <div style={{ width: "50%" }}>
+            <DateInput
+              name="dueDate"
+              label="Due Date"
+              placeholder="July 18, 2023"
+              onChange={(e) => setFormData({ ...formData, dueDate: e })}
+            />
+          </div>
         </div>
 
         <Textarea
@@ -94,11 +85,18 @@ export default function Form() {
           placeholder="Create a visually appealing homepage design"
           minRows={4}
           mt="md"
+          {...register("description")}
           classNames={{ input: classes.input, label: classes.inputLabel }}
         />
-
+        {errors.title && (
+          <Text fz="sm" c="red">
+            Description field is required
+          </Text>
+        )}
         <Group position="right" mt="md">
-          <Button className={classes.control}>Add</Button>
+          <Button className={classes.control} onClick={handleSubmit(onSubmit)}>
+            Add
+          </Button>
         </Group>
       </div>
     </Box>

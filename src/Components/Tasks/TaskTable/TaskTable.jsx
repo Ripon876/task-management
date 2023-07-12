@@ -1,10 +1,20 @@
 import { Table, ActionIcon, ScrollArea, Box, Tooltip } from "@mantine/core";
 import { IconFileDownload } from "@tabler/icons-react";
+import { useDispatch, useSelector } from "react-redux";
 import Row from "./Row";
-import { intialData } from "./../../../data/data";
 import AddTask from "../AddTask/AddTask";
 
 export default function TaskTable() {
+  const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.tasks);
+
+  const deleteTask = (index) => {
+    dispatch({
+      type: "DELETE_TASK",
+      index,
+    });
+  };
+
   return (
     <ScrollArea>
       <Box>
@@ -37,8 +47,8 @@ export default function TaskTable() {
           </tr>
         </thead>
         <tbody>
-          {intialData?.map((task) => (
-            <Row task={task} />
+          {tasks?.map((task, i) => (
+            <Row task={task} index={i} deleteTask={deleteTask} key={i}/>
           ))}
         </tbody>
       </Table>

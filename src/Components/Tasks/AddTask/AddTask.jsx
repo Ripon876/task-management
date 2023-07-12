@@ -2,7 +2,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import Form from "./Form";
 import { IconPlus } from "@tabler/icons-react";
-import { Table, ActionIcon, ScrollArea, Box, Tooltip } from "@mantine/core";
+import { ActionIcon, Tooltip } from "@mantine/core";
 
 export default function AddTask() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -10,7 +10,7 @@ export default function AddTask() {
   return (
     <>
       <Modal opened={opened} onClose={close} title="Add New Task" centered>
-        <Form />
+        <Form close={close} />
       </Modal>
 
       <ActionIcon ml={"auto"} onClick={open}>

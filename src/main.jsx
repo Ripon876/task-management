@@ -3,17 +3,21 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { MantineProvider } from "@mantine/core";
+import { Provider } from "react-redux";
+import store from "./store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        colorScheme: "light",
-      }}
-    >
-      <App />
-    </MantineProvider>
+    <Provider store={store}>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          colorScheme: "light",
+        }}
+      >
+        <App />
+      </MantineProvider>{" "}
+    </Provider>
   </React.StrictMode>
 );

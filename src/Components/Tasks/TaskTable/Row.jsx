@@ -3,7 +3,7 @@ import { Group, Text, ActionIcon, Tooltip } from "@mantine/core";
 import { IconPencil, IconTrash, IconEye } from "@tabler/icons-react";
 import UpdateTask from "../UpdateTask/UpdateTask";
 
-const Row = ({ task }) => {
+const Row = ({ task, deleteTask, index }) => {
   return (
     <tr key={task.id}>
       <td>
@@ -49,7 +49,7 @@ const Row = ({ task }) => {
           </ActionIcon>
 
           <UpdateTask />
-          <ActionIcon color="red" onClick={open}>
+          <ActionIcon color="red" onClick={() => deleteTask(index)}>
             <Tooltip label="Delete">
               <IconTrash size="1rem" stroke={1.5} />
             </Tooltip>
