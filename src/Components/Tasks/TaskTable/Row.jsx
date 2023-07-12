@@ -44,7 +44,7 @@ const Row = ({ task, deleteTask, index }) => {
       <td>
         <Group spacing={0} position="right">
           <ViewTask task={task} />
-          <UpdateTask task={task}/>
+          <UpdateTask task={task} index={index} />
           <ActionIcon color="red" onClick={() => deleteTask(index)}>
             <Tooltip label="Delete">
               <IconTrash size="1rem" stroke={1.5} />
