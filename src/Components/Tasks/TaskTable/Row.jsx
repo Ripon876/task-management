@@ -2,9 +2,18 @@ import React from "react";
 import { Group, Text, ActionIcon, Tooltip } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import UpdateTask from "../UpdateTask/UpdateTask";
-import ViewTask from "../../ViewTask/ViewTask";
+import ViewTask from "../ViewTask/ViewTask";
 
 const Row = ({ task, deleteTask, index }) => {
+  const dateString = task?.dueDate;
+  const targetDate = new Date(dateString);
+
+  // Get the current date
+  const currentDate = new Date();
+
+  // Compare the target date with the current date
+  const hasExpired = targetDate.getTime() < currentDate.getTime();
+
   return (
     <tr key={task.id}>
       <td>

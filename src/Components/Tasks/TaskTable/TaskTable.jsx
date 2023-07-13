@@ -1,6 +1,7 @@
 import { Table, ActionIcon, ScrollArea, Box, Tooltip } from "@mantine/core";
 import { IconFileDownload } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
+import csvDownload from "json-to-csv-export";
 import Row from "./Row";
 import AddTask from "../AddTask/AddTask";
 
@@ -15,6 +16,14 @@ export default function TaskTable() {
     });
   };
 
+  const exportList = () => {
+    csvDownload({
+      data: tasks,
+      filename: "tasks",
+      delimiter: ",",
+    });
+  };
+
   return (
     <ScrollArea>
       <Box>
@@ -26,7 +35,7 @@ export default function TaskTable() {
           }}
         >
           <AddTask />
-          <ActionIcon ml={"auto"}>
+          <ActionIcon ml={"auto"} onClick={exportList}>
             <Tooltip label="Export">
               <IconFileDownload color="black" stroke={1.5} />
             </Tooltip>
@@ -48,7 +57,7 @@ export default function TaskTable() {
         </thead>
         <tbody>
           {tasks?.map((task, i) => (
-            <Row task={task} index={i} deleteTask={deleteTask} key={i}/>
+            <Row task={task} index={i} deleteTask={deleteTask} key={i} />
           ))}
         </tbody>
       </Table>

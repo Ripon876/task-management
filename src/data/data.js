@@ -19,7 +19,7 @@ const tasks = [
     id: 3,
     title: "Write API Documentation",
     description: "Create clear and concise documentation for the API endpoints",
-    dueDate: "July 21, 2023",
+    dueDate: "July 11, 2023",
     assignedTo: "David",
     completed: false,
   },

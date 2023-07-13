@@ -102,7 +102,7 @@ export default function Form({ task, index, close }) {
         )}
         <Checkbox
           mt={"md"}
-          label="Compelted"
+          label="Completed"
           defaultChecked={task?.completed}
           {...register("completed")}
         />
